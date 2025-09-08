@@ -57,9 +57,9 @@ class Automatic1111Tagger extends Extension
                             $max_rating = $rating;
                         }
                     }
-                    if ($max_rating === 'general') {
+                    if ($max_rating === 'general' || $max_rating === 'sensitive') {
                         $rating_tag = 'rating:safe';
-                    } elseif ($max_rating === 'questionable' || $max_rating === 'sensitive') {
+                    } elseif ($max_rating === 'questionable') {
                         $rating_tag = 'rating:questionable';
                     } elseif ($max_rating === 'explicit') {
                         $rating_tag = 'rating:explicit';
@@ -126,9 +126,9 @@ class Automatic1111Tagger extends Extension
                         $max_rating = $rating;
                     }
                 }
-                if ($max_rating === 'general') {
+                if ($max_rating === 'general' || $max_rating === 'sensitive') {
                     $rating_tag = 'rating:safe';
-                } elseif ($max_rating === 'questionable' || $max_rating === 'sensitive') {
+                } elseif ($max_rating === 'questionable') {
                     $rating_tag = 'rating:questionable';
                 } elseif ($max_rating === 'explicit') {
                     $rating_tag = 'rating:explicit';
