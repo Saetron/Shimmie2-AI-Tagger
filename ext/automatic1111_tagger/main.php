@@ -89,7 +89,26 @@ class Automatic1111Tagger extends Extension
                 if (count($all_tags) > count($current_tags)) {
                     $all_tags = array_filter($all_tags, fn($t) => strtolower($t) !== 'tagme');
                     send_event(new TagSetEvent($image_obj, $all_tags));
+                    if (Ctx::$config->get(Automatic1111TaggerConfig::RESOLVE_ALIASES)) {
+                        // Alias resolution: fetch aliases and apply them
+                        $resolved_tags = $all_tags;
+                        $alias_map = [];
+                        $rows = Ctx::$database->get_all("SELECT oldtag, newtag FROM aliases");
+                        foreach ($rows as $row) {
+                            $alias_map[strtolower($row['oldtag'])] = $row['newtag'];
+                        }
+                        foreach ($resolved_tags as &$tag) {
+                            $tag_lower = strtolower($tag);
+                            if (isset($alias_map[$tag_lower])) {
+                                $tag = $alias_map[$tag_lower];
+                            }
+                        }
+                        unset($tag);
+                        $resolved_tags = array_filter(array_unique($resolved_tags), fn($t) => $t !== '');
+                        send_event(new TagSetEvent($image_obj, $resolved_tags));
+                    }
                     Ctx::$page->flash("Tags added");
+                    Ctx::$page->set_redirect(make_link("post/view/" . $post_id));
                 } else {
                     Ctx::$page->flash("No new tags to add.");
                 }
