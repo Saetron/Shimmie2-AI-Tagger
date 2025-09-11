@@ -1,47 +1,32 @@
-# Shimmie2 AI Tagger Plugin
+# Shimmie2 Custom Themes and Plugins
+
+This repository contains custom themes and plugins for the Shimmie2 image board software.
+
+## Overview
+
+- Collection of my plugins and themes for Shimmie2.
+- Designed to add features I wanted for my own installation.
 
 ## Installation
 
-1. Download or clone this repository into your Shimmie2 `ext/` directory:
+1. Download or clone this repository into your Shimmie2 home directory:
    ```
-   git clone https://github.com/Saetron/Shimmie2-AI-Tagger.git
+   git clone https://github.com/Saetron/Shimmie2-Plugins.git
    ```
-   or copy the `automatic1111_tagger` folder to `shimmie2/ext/`.
+   or copy the desired plugin/theme folders to `shimmie2/ext/` or `shimmie2/themes/`.
 
-2. Enable the plugin in your Shimmie2 admin panel under Extensions.
+2. Enable the plugins or themes in your Shimmie2 admin panel under Extensions.
 
-3. Configure the API endpoint, model, and threshold in the plugin settings (admin panel > Extensions > Automatic1111 Tagger).
+3. Configure each extension as needed in the admin panel.
 
-## Usage
+## Contributing
 
-- On each post page, you will see an "Interrogate" button and a "Get Rating" button.
-- "Interrogate" will send the image to Automatic1111 and add tags to the post.
-- "Get Rating" will send the image to Automatic1111 and add the appropriate rating tag (`rating:safe`, `rating:questionable`, or `rating:explicit`).
-
-## Setting up Automatic1111 with WD Tagger
-
-1. Install [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui) on your server.
-
-2. Install the [WD14 Tagger extension](https://github.com/toriato/stable-diffusion-webui-wd14-tagger) for Automatic1111:
-   - Clone the extension into your `stable-diffusion-webui/extensions/` directory:
-     ```
-     git clone https://github.com/toriato/stable-diffusion-webui-wd14-tagger.git
-     ```
-   - Restart Automatic1111.
-
-3. Start Automatic1111 with the API enabled:
-   ```
-   python launch.py --api
-   ```
-
-4. Make sure the WD tagger endpoint is available (default: `http://localhost:7860/tagger/v1/interrogate`).
-
-5. In Shimmie2, set the API endpoint in the plugin settings to match your Automatic1111 server.
+Feel free to submit your own Shimmie2 plugins or themes via pull request or open an issue for suggestions.
 
 ## Requirements
+
 - Shimmie2 (latest version recommended)
-- Automatic1111 stable-diffusion-webui with WD14 Tagger extension
-- Python 3.8+
+- Additional requirements may apply for specific plugins (see their individual README or documentation)
 
 ## Support
-If you have issues, please open an issue on the plugin repository.
+If you have issues, please open an issue on the repository.
